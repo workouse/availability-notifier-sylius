@@ -1,5 +1,5 @@
 {
-    "name": "availability-notifier-sylius",
+    "name": "workouse/availability-notifier-sylius",
     "type": "sylius-plugin",
     "keywords": ["sylius", "sylius-plugin"],
     "description": "This plugin provides 'send notification when product is available' feature for products out of stock.",
