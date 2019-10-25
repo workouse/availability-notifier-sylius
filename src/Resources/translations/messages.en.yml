@@ -1,0 +1,9 @@
+workouse_availability_notifier_plugin:
+  ui:
+    email_me: Email Me
+    waiting_customers: Waiting Customers
+    we_will_notify_you_when_the_product_is_added_in_stock: We will notify you when the product is added in stock.
+    notify_me_when_available: Notify Me When Available
+    enter_your_email_address_below__to_be_notified_when_this_item_is_available_to_purchase: Enter your email address below  to be notified when this item is available to purchase
+  form:
+    customer_email: Email

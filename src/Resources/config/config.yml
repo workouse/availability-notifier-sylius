@@ -1,0 +1,15 @@
+sylius_resource:
+  resources:
+    workouse_availability_notifier_plugin.availability_notifier:
+      driver: doctrine/orm
+      classes:
+        model: Workouse\AvailabilityNotifierPlugin\Entity\AvailabilityNotifier
+        interface: Workouse\AvailabilityNotifierPlugin\Entity\AvailabilityNotifierInterface
+        repository: Workouse\AvailabilityNotifierPlugin\Repository\AvailabilityNotifierRepository
+        form: Workouse\AvailabilityNotifierPlugin\Form\Type\AvailabilityNotifierType
+
+sylius_mailer:
+  emails:
+    product_stock_notifier:
+      subject: "Product stock notifier"
+      template: "@WorkouseAvailabilityNotifierPlugin/Email/productStockNotifier.html.twig"

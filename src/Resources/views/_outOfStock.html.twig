@@ -1,0 +1,24 @@
+<div class="ui segment" id="sylius-product-out-of-stock">
+    <div class="ui basic segment" style="text-align: center">
+        <h3>{{ "workouse_availability_notifier_plugin.ui.notify_me_when_available"|trans }}</h3>
+        <p>{{ "workouse_availability_notifier_plugin.ui.enter_your_email_address_below__to_be_notified_when_this_item_is_available_to_purchase"|trans }}</p>
+    </div>
+    {{ form_start(form, {'action': path('workouse_availability_notifier_plugin_new', { 'productId': productId }), 'attr': {'class': 'ui large loadable form', 'novalidate': 'novalidate'}}) }}
+
+    <div class="ui action input" style="width: 100%;">
+        {% if form.customer is defined %}
+            <input type="email" id="workouse_availability_notifier_plugin_form_availability_notifier_customer"
+                   name="workouse_availability_notifier_plugin_form_availability_notifier[customer]" required="required"
+                   placeholder="{{ 'workouse_availability_notifier_plugin.form.customer_email'|trans }}"
+                   style="width: auto;"
+            >
+        {% endif %}
+        <button type="submit"
+                class="ui blue button">{{ 'workouse_availability_notifier_plugin.ui.email_me'|trans }}</button>
+        {{ form_row(form._token) }}
+    </div>
+    <div class="ui red fluid top pointing basic label hidden sylius-validation-error"
+         id="sylius-product-out-of-stock-validation-error"></div>
+
+    {{ form_end(form, {'render_rest': false}) }}
+</div>

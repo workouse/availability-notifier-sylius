@@ -1,0 +1,3 @@
+workouse_availability_notifier_plugin:
+  customer_email:
+    not_blank: Email cannot be blank.

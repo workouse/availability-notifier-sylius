@@ -1,0 +1,11 @@
+workouse_availability_notifier_plugin_index:
+  path: /_partial/outofstock/{productId}
+  defaults:
+    _controller: workouse_availability_notifier_plugin.controller.availability_notifier:indexAction
+  methods: [GET]
+
+workouse_availability_notifier_plugin_new:
+  path: /_partial/outofstock/{productId}
+  defaults:
+    _controller: workouse_availability_notifier_plugin.controller.availability_notifier:newAction
+  methods: [POST]

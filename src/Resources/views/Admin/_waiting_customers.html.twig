@@ -1,0 +1,29 @@
+<div class="ui tab" data-tab="waiting_customers">
+    <h3 class="ui top attached header">
+        {{ 'workouse_availability_notifier_plugin.ui.waiting_customers'|trans }}
+    </h3>
+    <div class="ui attached segment">
+        <table class="ui very basic celled table">
+            <thead>
+            <tr>
+                <span class="ui teal label">Total: {{ availabilityNotifiersTotal }}</span>
+            </tr>
+            <tr>
+                <th><strong class="gray text">{{ 'sylius.ui.email'|trans }}</strong></th>
+                <th><strong class="gray text">{{ 'sylius.ui.name'|trans }}</strong></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for availabilityNotifier in availabilityNotifiers %}
+                <tr>
+                    <td class="seven wide"><strong class="gray text"><a
+                                    href="{{ path('sylius_admin_customer_show', { 'id': availabilityNotifier.customer.id }) }}">{{ availabilityNotifier.customer.email }}</a></strong>
+                    </td>
+                    <td>{{ availabilityNotifier.customer.fullname }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+

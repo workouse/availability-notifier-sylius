@@ -1,0 +1,5 @@
+workouse_availability_notifier_plugin_admin_waiting_customers:
+  path: /_partial/waiting_customers/{productId}
+  defaults:
+    _controller: workouse_availability_notifier_plugin.controller.availability_notifier:adminIndexAction
+  methods: [GET]

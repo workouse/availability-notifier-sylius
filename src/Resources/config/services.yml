@@ -1,0 +1,47 @@
+services:
+  workouse_availability_notifier_plugin.controller.availability_notifier:
+    class: Workouse\AvailabilityNotifierPlugin\Controller\AvailabilityNotifierController
+    public: true
+    arguments:
+      - '@templating'
+      - '@form.factory'
+      - '@sylius.repository.customer'
+      - '@sylius.factory.customer'
+      - '@doctrine.orm.default_entity_manager'
+      - '@workouse_availability_notifier_plugin.factory.availability_notifier'
+      - '@workouse_availability_notifier_plugin.repository.availability_notifier'
+      - '@sylius.repository.product'
+      - '@security.helper'
+      - '@validator'
+
+  workouse_availability_notifier_plugin.form.type.availability_notifier:
+    class: Workouse\AvailabilityNotifierPlugin\Form\Type\AvailabilityNotifierType
+    arguments:
+      - '%workouse_availability_notifier_plugin.model.availability_notifier.class%'
+      - ['workouse']
+      - '@security.helper'
+
+    tags:
+      - { name: form.type, alias: workouse_availability_notifier_plugin_form_availability_notifier }
+
+  workouse_availability_notifier_plugin:
+    class: Workouse\AvailabilityNotifierPlugin\EventListener\AvailabilityNotifierListener
+    arguments:
+      - '@workouse_availability_notifier_plugin.repository.availability_notifier'
+      - '@sylius.email_sender'
+      - '@doctrine.orm.default_entity_manager'
+    tags:
+      - { name: kernel.event_listener, event: sylius.product_variant.post_update, method: sendNotifierVariant }
+      - { name: kernel.event_listener, event: sylius.product.post_update, method: sendNotifierProduct }
+
+  workouse_availability_notifier_plugin.block_event_listener.shop.layout.javascripts:
+    class: Sylius\Bundle\UiBundle\Block\BlockEventListener
+    arguments:
+      - "@@WorkouseAvailabilityNotifierPlugin/Resources/views/_javascripts.html.twig"
+    tags:
+      - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.javascripts, method: onBlockEvent }
+
+  workouse_availability_notifier_plugin.listener.admin.product.form.menu_builder:
+    class: Workouse\AvailabilityNotifierPlugin\Menu\AdminProductFormMenuListener
+    tags:
+      - { name: kernel.event_listener, event: sylius.menu.admin.product.form, method: addItems }
