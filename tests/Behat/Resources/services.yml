@@ -1,0 +1,10 @@
+services:
+  workouse_availability_notifier.behat.context.ui.shop.product:
+    class: Tests\Workouse\AvailabilityNotifierPlugin\Behat\Context\Ui\ProductContext
+    public: true
+    arguments:
+      - '@workouse_availability_notifier.behat.page.shop.product.show'
+
+  workouse_availability_notifier.behat.page.shop.product.show:
+    class: Tests\Workouse\AvailabilityNotifierPlugin\Behat\Page\Shop\ShowPage
+    parent: sylius.behat.page.shop.product.show
