@@ -51,6 +51,12 @@ $ bin/console doctrine:migrations:migrate
 $ bin/console cache:clear
 ```
 
+## Usage
+You can  use ` @WorkouseAvailabilityNotifierPlugin/_outOfStock.html.twig` template to enable adding/removing/displaying wishlist from the Twig UI.  
+
+For an example on how to do that, take a look at [these source files](https://github.com/workouse/availability-notifier-sylius/tree/master/tests/Application/templates/bundles/SyliusShopBundle/Product/Show).
+
+
 ## Testing & running the plugin
 ```bash
 $ composer install
