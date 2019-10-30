@@ -4,6 +4,11 @@
 
 This plugin provides "send notification when product is available" feature for products out of stock.
 
+Screenshots:
+<img src="https://github.com/workouse/availability-notifier-sylius/blob/master/screenshot_1.png" width="100%">
+<img src="https://github.com/workouse/availability-notifier-sylius/blob/master/screenshot_2.png" width="100%">
+<img src="https://github.com/workouse/availability-notifier-sylius/blob/master/screenshot_3.png" width="100%">
+
 ## Installation
 ```bash
 $ composer require workouse/availability-notifier-sylius
