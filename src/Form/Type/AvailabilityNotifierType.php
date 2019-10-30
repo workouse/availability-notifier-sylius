@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Workouse\AvailabilityNotifierPlugin\Form\Type;
 
@@ -28,9 +29,9 @@ class AvailabilityNotifierType extends AbstractResourceType
             'label' => 'workouse_availability_notifier_plugin.form.customer_email',
             'constraints' => [
                 new NotBlank([
-                    'message' => 'workouse_availability_notifier_plugin.customer_email.not_blank'
+                    'message' => 'workouse_availability_notifier_plugin.customer_email.not_blank',
                 ]),
-                new Email()
+                new Email(),
             ],
         ]);
 

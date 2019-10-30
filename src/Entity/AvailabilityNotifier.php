@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Workouse\AvailabilityNotifierPlugin\Entity;
 
@@ -54,7 +55,7 @@ class AvailabilityNotifier implements AvailabilityNotifierInterface
      */
     public function onPrePersist()
     {
-        $this->createdAt = new \DateTime("now");
+        $this->createdAt = new \DateTime('now');
     }
 
     public function getId()
@@ -111,5 +112,4 @@ class AvailabilityNotifier implements AvailabilityNotifierInterface
     {
         $this->createdAt = $createdAt;
     }
-
 }

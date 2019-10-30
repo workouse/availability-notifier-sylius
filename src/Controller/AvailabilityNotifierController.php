@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Workouse\AvailabilityNotifierPlugin\Controller;
 
@@ -9,6 +10,7 @@ use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Customer\Model\Customer;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +24,6 @@ use Workouse\AvailabilityNotifierPlugin\Entity\AvailabilityNotifier;
 use Workouse\AvailabilityNotifierPlugin\Entity\AvailabilityNotifierInterface;
 use Workouse\AvailabilityNotifierPlugin\Form\Type\AvailabilityNotifierType;
 use Workouse\AvailabilityNotifierPlugin\Repository\AvailabilityNotifierRepository;
-use Symfony\Bundle\TwigBundle\TwigEngine;
 
 class AvailabilityNotifierController
 {
@@ -67,8 +68,7 @@ class AvailabilityNotifierController
         ProductRepositoryInterface $productRepository,
         Security $security,
         ValidatorInterface $validator
-    )
-    {
+    ) {
         $this->templatingEngine = $templatingEngine;
         $this->formFactory = $formFactory;
         $this->customerRepository = $customerRepository;
@@ -81,7 +81,7 @@ class AvailabilityNotifierController
         $this->validator = $validator;
     }
 
-    public function indexAction(Request $request, $productId): Response
+    public function indexAction($productId): Response
     {
         $form = $this->formFactory->create(AvailabilityNotifierType::class);
 
@@ -132,10 +132,9 @@ class AvailabilityNotifierController
             }
 
             return new JsonResponse([
-                "content" => $this->templatingEngine->render('@WorkouseAvailabilityNotifierPlugin/_successful.html.twig')
+                'content' => $this->templatingEngine->render('@WorkouseAvailabilityNotifierPlugin/_successful.html.twig'),
             ], 201);
         }
-
     }
 
     public function getUserByEmail($customerEmail)
@@ -144,7 +143,7 @@ class AvailabilityNotifierController
         $user = $this->security->getUser();
 
         $customer = $user !== null ? $user->getCustomer() : $this->customerRepository->findOneBy([
-            'email' => $customerEmail
+            'email' => $customerEmail,
         ]);
 
         if (!$customer) {
@@ -168,20 +167,19 @@ class AvailabilityNotifierController
 
         $availabilityNotifiers = $this->availabilityNotifierRepository->findBy([
             'product' => $product,
-            'status' => false
+            'status' => false,
         ], [], 20);
 
         $availabilityNotifiersTotal = count($this->availabilityNotifierRepository->findBy([
             'product' => $product,
-            'status' => false
+            'status' => false,
         ]));
-
 
         return $this->templatingEngine->renderResponse(
             '@WorkouseAvailabilityNotifierPlugin/Admin/_waiting_customers.html.twig',
             [
                 'availabilityNotifiers' => $availabilityNotifiers,
-                'availabilityNotifiersTotal' => $availabilityNotifiersTotal
+                'availabilityNotifiersTotal' => $availabilityNotifiersTotal,
             ]
         );
     }

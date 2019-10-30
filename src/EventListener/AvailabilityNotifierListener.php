@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Workouse\AvailabilityNotifierPlugin\EventListener;
 
@@ -28,8 +29,7 @@ class AvailabilityNotifierListener
         AvailabilityNotifierRepository $notifierRepository,
         SenderInterface $mailSender,
         EntityManagerInterface $entityManager
-    )
-    {
+    ) {
         $this->mailSender = $mailSender;
         $this->notifierRepository = $notifierRepository;
         $this->entityManager = $entityManager;
@@ -60,7 +60,7 @@ class AvailabilityNotifierListener
             $availabilityNotifiers = $this->notifierRepository->findBy([
                 'product' => $product,
                 'status' => false,
-                'type' => AvailabilityNotifierInterface::EMAIL_TYPE
+                'type' => AvailabilityNotifierInterface::EMAIL_TYPE,
             ]);
 
             /** @var AvailabilityNotifier $availabilityNotifier */
@@ -72,7 +72,7 @@ class AvailabilityNotifierListener
 
                 $this->mailSender->send('product_stock_notifier', [$cutomer->getEmail()], [
                     'product' => $product,
-                    'cutomer' => $cutomer
+                    'cutomer' => $cutomer,
                 ]);
                 $this->entityManager->flush();
             }
