@@ -4,6 +4,7 @@
     "keywords": ["sylius", "sylius-plugin"],
     "description": "This plugin provides 'send notification when product is available' feature for products out of stock.",
     "license": "MIT",
+    "version": "0.1.0",
     "require": {
         "php": "^7.2",
 
