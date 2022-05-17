@@ -1,15 +1,18 @@
+parameters:
+    workouse_availability_notifier_plugin.model.availability_notifier.class: \Workouse\AvailabilityNotifierPlugin\Entity\AvailabilityNotifier
+
 services:
   workouse_availability_notifier_plugin.controller.availability_notifier:
     class: Workouse\AvailabilityNotifierPlugin\Controller\AvailabilityNotifierController
     public: true
     arguments:
-      - '@templating'
+      - '@twig'
       - '@form.factory'
       - '@sylius.repository.customer'
       - '@sylius.factory.customer'
       - '@doctrine.orm.default_entity_manager'
-      - '@workouse_availability_notifier_plugin.factory.availability_notifier'
-      - '@workouse_availability_notifier_plugin.repository.availability_notifier'
+      - '@workouse_availability_notifier.factory.availability_notifier'
+      - '@workouse_availability_notifier.repository.availability_notifier'
       - '@sylius.repository.product'
       - '@security.helper'
       - '@validator'
@@ -27,7 +30,7 @@ services:
   workouse_availability_notifier_plugin:
     class: Workouse\AvailabilityNotifierPlugin\EventListener\AvailabilityNotifierListener
     arguments:
-      - '@workouse_availability_notifier_plugin.repository.availability_notifier'
+      - '@workouse_availability_notifier.repository.availability_notifier'
       - '@sylius.email_sender'
       - '@doctrine.orm.default_entity_manager'
     tags:
@@ -37,7 +40,7 @@ services:
   workouse_availability_notifier_plugin.block_event_listener.shop.layout.javascripts:
     class: Sylius\Bundle\UiBundle\Block\BlockEventListener
     arguments:
-      - "@@WorkouseAvailabilityNotifierPlugin/Resources/views/_javascripts.html.twig"
+      - "@@WorkouseAvailabilityNotifierPlugin/_javascripts.html.twig"
     tags:
       - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.javascripts, method: onBlockEvent }
 

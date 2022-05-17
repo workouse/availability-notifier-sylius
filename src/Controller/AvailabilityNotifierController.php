@@ -20,6 +20,7 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Twig\Environment;
 use Workouse\AvailabilityNotifierPlugin\Entity\AvailabilityNotifier;
 use Workouse\AvailabilityNotifierPlugin\Entity\AvailabilityNotifierInterface;
 use Workouse\AvailabilityNotifierPlugin\Form\Type\AvailabilityNotifierType;
@@ -58,7 +59,7 @@ class AvailabilityNotifierController
     private $validator;
 
     public function __construct(
-        TwigEngine $templatingEngine,
+        Environment $templatingEngine,
         FormFactoryInterface $formFactory,
         CustomerRepositoryInterface $customerRepository,
         FactoryInterface $customerFactory,
@@ -85,9 +86,11 @@ class AvailabilityNotifierController
     {
         $form = $this->formFactory->create(AvailabilityNotifierType::class);
 
-        return $this->templatingEngine->renderResponse(
-            '@WorkouseAvailabilityNotifierPlugin/_outOfStock.html.twig',
-            ['form' => $form->createView(), 'productId' => $productId]
+        return new Response(
+            $this->templatingEngine->render(
+                '@WorkouseAvailabilityNotifierPlugin/_outOfStock.html.twig',
+                ['form' => $form->createView(), 'productId' => $productId]
+            )
         );
     }
 
@@ -175,12 +178,14 @@ class AvailabilityNotifierController
             'status' => false,
         ]));
 
-        return $this->templatingEngine->renderResponse(
-            '@WorkouseAvailabilityNotifierPlugin/Admin/_waiting_customers.html.twig',
-            [
-                'availabilityNotifiers' => $availabilityNotifiers,
-                'availabilityNotifiersTotal' => $availabilityNotifiersTotal,
-            ]
+        return new Response(
+            $this->templatingEngine->render(
+                '@WorkouseAvailabilityNotifierPlugin/Admin/_waiting_customers.html.twig',
+                [
+                    'availabilityNotifiers' => $availabilityNotifiers,
+                    'availabilityNotifiersTotal' => $availabilityNotifiersTotal,
+                ]
+            )
         );
     }
 }
