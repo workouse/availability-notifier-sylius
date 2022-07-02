@@ -11,7 +11,8 @@ build:
                     - js-scrutinizer-run
         tests: true
     environment:
-        version: '8.0'
+        php:
+            version: '8.0'
 
 filter:
     excluded_paths:
