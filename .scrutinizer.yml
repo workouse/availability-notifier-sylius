@@ -12,13 +12,16 @@ build:
         tests: true
     environment:
         version: '8.0'
+
 filter:
     excluded_paths:
         - 'tests/*'
         - 'features/*'
+
 checks:
     php: true
     javascript: true
+
 coding_style:
     php:
         spaces:
