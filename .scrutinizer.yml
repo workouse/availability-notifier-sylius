@@ -7,18 +7,21 @@ build:
             tests:
                 override:
                     - php-scrutinizer-run
-                    -
-                        command: phpcs-run
-                        use_website_config: true
                     - js-scrutinizer-run
         tests: true
+    environment:
+        php:
+            version: '8.0'
+
 filter:
     excluded_paths:
         - 'tests/*'
         - 'features/*'
+
 checks:
     php: true
     javascript: true
+
 coding_style:
     php:
         spaces:
