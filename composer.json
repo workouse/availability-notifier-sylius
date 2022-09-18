@@ -4,7 +4,6 @@
     "keywords": ["sylius", "sylius-plugin"],
     "description": "This plugin provides 'send notification when product is available' feature for products out of stock.",
     "license": "MIT",
-    "version": "1.0.0",
     "require": {
         "php": "^7.4 || ^8.0 || ^8.1",
         "sylius/sylius": "^1.10 || 1.11"
@@ -40,26 +39,42 @@
         "vimeo/psalm": "4.23.0",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },
-    "prefer-stable": true,
-    "autoload": {
-        "psr-4": {
-            "Workouse\\AvailabilityNotifierPlugin\\": "src/",
-            "Tests\\Workouse\\AvailabilityNotifierPlugin\\": "tests/"
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "symfony/thanks": true,
+            "phpstan/extension-installer": true
         }
-    },
-    "autoload-dev": {
-        "classmap": ["tests/Application/Kernel.php"]
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.5-dev"
+            "dev-master": "1.11-dev"
         }
     },
-    "config": {
-        "allow-plugins": {
-            "symfony/thanks": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "phpstan/extension-installer": true
+    "autoload": {
+        "psr-4": {
+            "Workouse\\AvailabilityNotifierPlugin\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Workouse\\AvailabilityNotifierPlugin\\": "src/",
+            "Tests\\Workouse\\AvailabilityNotifierPlugin\\": "tests/"
+        },
+        "classmap": [
+            "tests/Application/Kernel.php"
+        ]
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "php bin/create_node_symlink.php"
+        ],
+        "post-update-cmd": [
+            "php bin/create_node_symlink.php"
+        ],
+        "post-create-project-cmd": [
+            "php bin/create_node_symlink.php"
+        ]
     }
 }
